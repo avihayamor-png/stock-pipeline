@@ -8,3 +8,6 @@ __pycache__/
 preview.html
 digest.log
 .DS_Store
+
+# agent proposal output (turned into a PR by the workflow)
+proposal/

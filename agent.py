@@ -14,6 +14,7 @@ Run:   python agent.py            -> analyze + email
 import json
 import os
 import re
+import shutil
 import smtplib
 import sys
 from datetime import datetime, timedelta, timezone
@@ -32,7 +33,12 @@ ROOT = Path(__file__).parent
 PORTFOLIO_FILE = ROOT / "portfolio.json"
 HISTORY_FILE = ROOT / "history.json"
 MODEL = os.getenv("CLAUDE_MODEL", "claude-haiku-5-5")
+PROPOSALS_FILE = ROOT / "proposals.json"   # log of past proposals (agent memory)
+PROPOSAL_DIR = ROOT / "proposal"           # output the workflow turns into a PR
 MAX_STEPS = 8          # max tool-call rounds per holding
+MAX_REVIEW_STEPS = 12  # max tool-call rounds for the portfolio review
+MAX_PROPOSALS = 2      # max add/remove proposals per run
+PROPOSAL_COOLDOWN_DAYS = 14  # don't re-propose the same ticker within this window
 HISTORY_KEEP = 30      # reports kept per holding
 DRY_RUN = "--dry-run" in sys.argv
 TODAY = datetime.now(timezone.utc).date()
@@ -214,44 +220,48 @@ def validate_report(report):
     return problems
 
 
-def run_agent(ticker, history):
-    messages = [{"role": "user", "content": f"Analyze {ticker} for today's digest ({TODAY})."}]
+def agent_loop(system, prompt, tools, finish_tool, validate, call_tool, max_steps, label):
+    """Generic tool-use loop: the model calls tools until it submits `finish_tool`.
+
+    Returns (submitted_input, steps). A submission that fails `validate` is sent
+    back to the model with the problems so it can fix and resubmit.
+    """
+    messages = [{"role": "user", "content": prompt}]
     steps = []
 
-    for _ in range(MAX_STEPS):
+    for _ in range(max_steps):
         response = claude.messages.create(
             model=MODEL,
             max_tokens=1500,
-            system=SYSTEM_PROMPT,
-            tools=TOOLS,
+            system=system,
+            tools=tools,
             messages=messages,
         )
         messages.append({"role": "assistant", "content": response.content})
         calls = [b for b in response.content if b.type == "tool_use"]
 
         if not calls:
-            messages.append({"role": "user", "content": "Please call submit_report now."})
+            messages.append({"role": "user", "content": f"Please call {finish_tool} now."})
             continue
 
         results = []
         for call in calls:
-            if call.name == "submit_report":
-                report = dict(call.input)
-                problems = validate_report(report)
+            if call.name == finish_tool:
+                submitted = dict(call.input)
+                problems = validate(submitted)
                 if not problems:
-                    report.update(ticker=ticker, steps=steps)
-                    return report
-                # Bad report: tell the agent what's wrong and let it resubmit.
+                    return submitted, steps
+                # Bad submission: tell the agent what's wrong and let it resubmit.
                 results.append({
                     "type": "tool_result",
                     "tool_use_id": call.id,
-                    "content": "Report rejected: " + "; ".join(problems) + ". Call submit_report again with all fields.",
+                    "content": "Rejected: " + "; ".join(problems) + f". Fix this and call {finish_tool} again.",
                     "is_error": True,
                 })
                 continue
             steps.append(f"{call.name}({call.input.get('ticker', '')})")
             try:
-                output = run_tool(call.name, call.input, history)
+                output = call_tool(call.name, call.input)
             except Exception as e:  # tool failures go back to the agent, not crash the run
                 output = {"error": str(e)}
             results.append({
@@ -261,7 +271,170 @@ def run_agent(ticker, history):
             })
         messages.append({"role": "user", "content": results})
 
-    raise RuntimeError(f"{ticker}: agent did not finish within {MAX_STEPS} steps")
+    raise RuntimeError(f"{label}: agent did not finish within {max_steps} steps")
+
+
+def run_agent(ticker, history):
+    report, steps = agent_loop(
+        system=SYSTEM_PROMPT,
+        prompt=f"Analyze {ticker} for today's digest ({TODAY}).",
+        tools=TOOLS,
+        finish_tool="submit_report",
+        validate=validate_report,
+        call_tool=lambda name, args: run_tool(name, args, history),
+        max_steps=MAX_STEPS,
+        label=ticker,
+    )
+    report.update(ticker=ticker, steps=steps)
+    return report
+
+
+# ─── Portfolio review: propose adding/removing holdings ──────────────
+# The agent only PROPOSES. The workflow turns a proposal into a pull request
+# that edits portfolio.json; merging it is the human approval.
+def get_peers(ticker):
+    """Companies in the same industry (Finnhub peers)."""
+    if is_crypto(ticker):
+        return {"note": "peers are not available for crypto"}
+    peers = [p for p in fh.company_peers(ticker) if p and p.upper() != ticker.upper()]
+    return peers[:10] or {"note": f"no peers found for {ticker}"}
+
+
+REVIEW_TOOLS = [
+    next(t for t in TOOLS if t["name"] == n) for n in ("get_price", "get_news", "get_earnings", "get_history")
+] + [
+    {
+        "name": "get_peers",
+        "description": "Same-industry peer companies for a stock ticker. Use to find candidates to add.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"ticker": {"type": "string"}},
+            "required": ["ticker"],
+        },
+    },
+    {
+        "name": "submit_proposals",
+        "description": "Submit your proposals. Call exactly once. An empty list is the normal, expected result.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "proposals": {
+                    "type": "array",
+                    "maxItems": MAX_PROPOSALS,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "action": {"type": "string", "enum": ["add", "remove"]},
+                            "ticker": {"type": "string"},
+                            "reason": {"type": "string", "description": "2-3 sentences, citing tool results."},
+                        },
+                        "required": ["action", "ticker", "reason"],
+                    },
+                },
+            },
+            "required": ["proposals"],
+        },
+    },
+]
+
+REVIEW_PROMPT = f"""You review a personal watch-list portfolio and may propose changes to the list of holdings.
+A human approves or rejects every proposal, so be conservative: most days you should propose NOTHING.
+
+You get today's per-holding reports and your past proposals.
+- Propose "remove" only for a current holding whose own reports show a sustained, evidence-backed problem
+  (e.g. repeated Bearish reports with a clear negative catalyst), not for one bad day.
+- Propose "add" only for a ticker you actually researched with tools (get_peers to find candidates,
+  then get_price and get_news on the candidate), with a concrete reason it deserves watching.
+- Never re-propose a ticker you proposed in the last {PROPOSAL_COOLDOWN_DAYS} days.
+- At most {MAX_PROPOSALS} proposals. Base every claim on tool results. Never invent numbers or news.
+
+Finish by calling submit_proposals exactly once (an empty list is fine)."""
+
+
+def recent_proposal_tickers(log):
+    cutoff = TODAY - timedelta(days=PROPOSAL_COOLDOWN_DAYS)
+    return {p["ticker"].upper() for p in log if datetime.fromisoformat(p["date"]).date() >= cutoff}
+
+
+def make_proposal_validator(holdings, log):
+    held = {h.upper() for h in holdings}
+    recent = recent_proposal_tickers(log)
+
+    def validate(submitted):
+        proposals = submitted.get("proposals")
+        if not isinstance(proposals, list):
+            return ["'proposals' must be a list"]
+        if len(proposals) > MAX_PROPOSALS:
+            return [f"at most {MAX_PROPOSALS} proposals"]
+        problems = []
+        for p in proposals:
+            if not isinstance(p, dict) or not all(isinstance(p.get(k), str) and p.get(k) for k in ("action", "ticker", "reason")):
+                problems.append("each proposal needs non-empty 'action', 'ticker' and 'reason'")
+                continue
+            t = p["ticker"].strip().upper()
+            if p["action"] not in ("add", "remove"):
+                problems.append(f"{t}: action must be 'add' or 'remove'")
+            elif p["action"] == "remove" and t not in held:
+                problems.append(f"{t}: cannot remove, it is not a current holding")
+            elif p["action"] == "add" and t in held:
+                problems.append(f"{t}: cannot add, it is already a holding")
+            elif p["action"] == "add" and "error" in get_price(t):
+                problems.append(f"{t}: no price data, not a valid ticker")
+            if t in recent:
+                problems.append(f"{t}: already proposed in the last {PROPOSAL_COOLDOWN_DAYS} days")
+        return problems
+
+    return validate
+
+
+def review_portfolio(holdings, reports, history, log):
+    slim = [{k: r[k] for k in ("ticker", "sentiment", "sentiment_change", "priority", "summary")} for r in reports]
+    prompt = (
+        f"Today is {TODAY}. Current holdings: {holdings}.\n\n"
+        f"Today's reports:\n{json.dumps(slim)}\n\n"
+        f"Your past proposals (most recent last):\n{json.dumps(log[-20:])}"
+    )
+
+    def call_tool(name, args):
+        if name == "get_peers":
+            return get_peers(args.get("ticker", ""))
+        return run_tool(name, args, history)
+
+    submitted, steps = agent_loop(
+        system=REVIEW_PROMPT,
+        prompt=prompt,
+        tools=REVIEW_TOOLS,
+        finish_tool="submit_proposals",
+        validate=make_proposal_validator(holdings, log),
+        call_tool=call_tool,
+        max_steps=MAX_REVIEW_STEPS,
+        label="portfolio review",
+    )
+    proposals = [
+        {"action": p["action"], "ticker": p["ticker"].strip().upper(), "reason": p["reason"].strip()}
+        for p in submitted["proposals"]
+    ]
+    return proposals, steps
+
+
+def write_proposal_files(holdings, proposals):
+    """Write proposal/ for the workflow to turn into a pull request."""
+    new = [h for h in holdings if h.upper() not in {p["ticker"] for p in proposals if p["action"] == "remove"}]
+    new += [p["ticker"] for p in proposals if p["action"] == "add"]
+    PROPOSAL_DIR.mkdir(exist_ok=True)
+    (PROPOSAL_DIR / "portfolio.json").write_text(json.dumps({"holdings": new}, indent=2) + "\n")
+    summary = ", ".join(f"{p['action']} {p['ticker']}" for p in proposals)
+    (PROPOSAL_DIR / "title.txt").write_text(f"Portfolio proposal {TODAY}: {summary}")
+    body = [
+        "The portfolio-review agent proposes these changes to `portfolio.json`.",
+        "",
+        "**Merge this PR to approve. Close it to reject.**",
+        "",
+    ]
+    for p in proposals:
+        body += [f"### {p['action'].capitalize()} {p['ticker']}", p["reason"], ""]
+    body += [f"Holdings after this change: {', '.join(new)}", "", "_Generated by Stock Pipeline. Not investment advice._"]
+    (PROPOSAL_DIR / "body.md").write_text("\n".join(body) + "\n")
 
 
 # ─── Editor step: one brief across the whole portfolio ───────────────
@@ -310,14 +483,29 @@ COLORS = {"Bullish": "#16a34a", "Bearish": "#dc2626", "Mixed": "#ca8a04", "Neutr
 PRIORITY_BADGE = {"high": ("HIGH", "#dc2626"), "medium": ("MEDIUM", "#ca8a04"), "low": ("LOW", "#9ca3af")}
 
 
-def build_html(reports, brief, prices):
+def build_proposals_html(proposals):
+    if not proposals:
+        return ""
+    repo = os.getenv("GITHUB_REPOSITORY")
+    where = (f'<a href="https://github.com/{repo}/pulls">the pull request on GitHub</a>' if repo
+             else "the pull request on GitHub")
+    items = "".join(
+        f'<li style="margin:6px 0"><strong>{p["action"].capitalize()} {p["ticker"]}</strong> — {p["reason"]}</li>'
+        for p in proposals
+    )
+    return f"""<div style="border:2px solid #2563eb;border-radius:8px;padding:12px 16px;margin:16px 0">
+<strong>🧭 Proposed portfolio changes</strong><ul style="margin:8px 0;padding-left:20px">{items}</ul>
+<p style="margin:4px 0;font-size:13px;color:#374151">Approve by merging {where}; close it to reject.</p></div>"""
+
+
+def build_html(reports, brief, prices, proposals=()):
     date_str = datetime.now().strftime("%A, %B %d, %Y")
     html = f"""<html><body style="font-family:-apple-system,Segoe UI,sans-serif;max-width:700px;margin:auto;padding:16px;color:#111">
 <h2 style="border-bottom:2px solid #111;padding-bottom:8px">📊 Stock Pipeline — {date_str}</h2>
 <div style="background:#f3f4f6;border-radius:8px;padding:12px 16px;margin:16px 0">
 <strong>What matters today</strong><ul style="margin:8px 0;padding-left:20px">
 {''.join(f'<li style="margin:4px 0">{b}</li>' for b in brief)}
-</ul></div>"""
+</ul></div>{build_proposals_html(proposals)}"""
     for r in reports:
         p = prices.get(r["ticker"]) or {}
         chg = p.get("change_1d_pct", 0)
@@ -380,7 +568,32 @@ def main():
     order = {"high": 0, "medium": 1, "low": 2}
     reports.sort(key=lambda r: order[r["priority"]])
     brief = write_brief(reports)
-    html = build_html(reports, brief, prices)
+
+    # Portfolio review: may propose adding/removing holdings (human approves via PR).
+    shutil.rmtree(PROPOSAL_DIR, ignore_errors=True)
+    proposal_log = load_json(PROPOSALS_FILE, [])
+    proposals = []
+    if os.getenv("OPEN_PROPOSAL", "0") not in ("", "0"):
+        print("\n🧭 Portfolio review skipped: a proposal pull request is still open.")
+    else:
+        print("\n🧭 Portfolio review")
+        try:
+            proposals, steps = review_portfolio(holdings, reports, history, proposal_log)
+            print(f"   {' → '.join(steps) or 'no tool calls'}")
+            for p in proposals:
+                print(f"   ➜ propose {p['action']} {p['ticker']}")
+            if not proposals:
+                print("   ✓ no changes proposed")
+        except Exception as e:  # a failed review must not block the daily digest
+            print(f"   ✗ review failed: {e}")
+            proposals = []
+    if proposals:
+        write_proposal_files(holdings, proposals)
+        if not DRY_RUN:
+            proposal_log += [{"date": TODAY.isoformat(), **p} for p in proposals]
+            PROPOSALS_FILE.write_text(json.dumps(proposal_log[-100:], indent=2) + "\n")
+
+    html = build_html(reports, brief, prices, proposals)
     alerts = sum(r["priority"] == "high" for r in reports)
 
     if DRY_RUN:

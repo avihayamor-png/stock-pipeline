@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write             # lets the run save history.json (agent memory)
+  pull-requests: write        # lets the run open portfolio proposal PRs
 
 jobs:
   digest:
@@ -20,6 +21,14 @@ jobs:
           cache: pip
 
       - run: pip install -r requirements.txt
+
+      # One proposal at a time: skip the review while a proposal PR is still open.
+      - name: Check for open proposal
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh pr list --label portfolio-proposal --state open --json number --jq length 2>/dev/null || echo 0)
+          echo "OPEN_PROPOSAL=$n" >> "$GITHUB_ENV"
 
       - name: Run agent
         env:
@@ -35,5 +44,23 @@ jobs:
           git config user.name "stock-pipeline-bot"
           git config user.email "actions@github.com"
           git add history.json
+          if [ -f proposals.json ]; then git add proposals.json; fi
           git diff --staged --quiet || git commit -m "memory: $(date -u +%F)"
           git push
+
+      # The agent only proposes; merging this PR is the human approval.
+      - name: Open proposal pull request
+        if: hashFiles('proposal/portfolio.json') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="proposal/$(date -u +%F)"
+          git checkout -b "$branch"
+          cp proposal/portfolio.json portfolio.json
+          git add portfolio.json
+          git commit -m "$(cat proposal/title.txt)"
+          git push --force -u origin "$branch"
+          gh label create portfolio-proposal --color 2563eb \
+            --description "Holding changes proposed by the agent" 2>/dev/null || true
+          gh pr create --base main --head "$branch" --label portfolio-proposal \
+            --title "$(cat proposal/title.txt)" --body-file proposal/body.md

@@ -43,6 +43,18 @@ HTML email (Gmail SMTP) + history.json committed back (memory)
 - **get_history**: the agent's last 5 reports on that ticker, to detect sentiment shifts.
 - **submit_report**: structured output (JSON schema), so the email never breaks on free text.
 
+## Portfolio proposals (human-in-the-loop)
+
+After the daily reports, a second **portfolio-review agent** looks across all holdings and may propose
+adding or removing tickers. It can call `get_peers` (same-industry companies, via Finnhub) plus the tools above.
+
+- It only **proposes**. The workflow turns a proposal into a **pull request** that edits `portfolio.json`.
+  **Merge the PR to approve, close it to reject.** The email also shows the proposal.
+- Guardrails: at most 2 proposals per run, an empty proposal is the normal result, every claim must come
+  from tool results, and code validates each proposal (real ticker, not already held, no repeat within 14 days).
+- Only one proposal PR is open at a time; the review is skipped while one is pending.
+- Past proposals are kept in `proposals.json`, so the agent remembers what it already suggested.
+
 ## Run it locally
 
 ```bash
