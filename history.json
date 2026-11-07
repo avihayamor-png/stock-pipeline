@@ -1,1 +1,92 @@
-{}
+{
+  "ASPI": [
+    {
+      "date": "2026-11-07",
+      "price": {
+        "ticker": "ASPI",
+        "price": 2.08,
+        "change_1d_pct": 20.64,
+        "change_5d_pct": 2.72,
+        "change_1m_pct": -27.45
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "ASPI rose 20.6% today to $2.08 while SPY was up only 0.3%, so the move is stock-specific. The likely catalyst is news from Nov 6 that partner Tetra4 (a Renergen subsidiary) completed commissioning and began stable liquid helium production at South Africa's Virginia Gas Project, with initial deliveries starting. The stock is still down about 27% over one month and is up only 2.7% over five days, so today's gain partly recovers a sharp prior pullback."
+    }
+  ],
+  "OUST": [
+    {
+      "date": "2026-11-07",
+      "price": {
+        "ticker": "OUST",
+        "price": 34.79,
+        "change_1d_pct": 14.01,
+        "change_5d_pct": 17.0,
+        "change_1m_pct": -16.5
+      },
+      "sentiment": "Bullish",
+      "priority": "high",
+      "summary": "OUST rose 14.0% today to $34.79 while SPY was up only 0.31%, so this is a stock-specific move. It follows a Q3 2026 beat (record $59.3M revenue, 50% YoY growth, Q4 guide of $61-64M, over $400M cash) and an Amerx upgrade to Buy on Nov 4, then a give-back selloff on Nov 5. No news in the past 14 days explains today's rebound, so the catalyst is unconfirmed. The stock is still down 16.5% over one month, and it is up 17% over five days."
+    }
+  ],
+  "LAES": [
+    {
+      "date": "2026-11-07",
+      "price": {
+        "ticker": "LAES",
+        "price": 1.32,
+        "change_1d_pct": 7.32,
+        "change_5d_pct": -10.2,
+        "change_1m_pct": -43.59
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "LAES (SEALSQ) rose 7.3% today on a flat market (SPY +0.3%), a stock-specific move. The 14-day news flow shows only routine announcements (a post-quantum partnership with TechAgency, a wave-energy MoU, and a Cannes event), with no earnings or financial catalyst that explains the jump. The stock is still down 10.2% over 5 days and 43.6% over one month, so today's bounce comes after a steep sell-off."
+    }
+  ],
+  "TGEN": [
+    {
+      "date": "2026-11-07",
+      "price": {
+        "ticker": "TGEN",
+        "price": 1.72,
+        "change_1d_pct": 12.42,
+        "change_5d_pct": -13.57,
+        "change_1m_pct": -37.68
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "TGEN (Tecogen) rose 12.4% today to $1.72 while SPY gained 0.3%, so the move is stock-specific. No news in the past 7 days explains the bounce; the only items are the Nov 4 notice of the Q3 2026 earnings date and an unrelated Fortune Brands result. The stock is still down 13.6% over 5 days and 37.7% over one month, so today's gain looks like a partial rebound from a steep decline. This is the first report, so there is no prior sentiment to compare against."
+    }
+  ],
+  "ETH-USD": [
+    {
+      "date": "2026-11-07",
+      "price": {
+        "ticker": "ETH-USD",
+        "price": 2242.14,
+        "change_1d_pct": 0.32,
+        "change_5d_pct": -0.3,
+        "change_1m_pct": -12.88
+      },
+      "sentiment": "Mixed",
+      "priority": "medium",
+      "summary": "ETH-USD closed at $2,242.14, up 0.32% today, in line with SPY (+0.31%), so no stock-specific move. Over one month ETH is down 12.9% versus SPY's -5.4%, so it is underperforming the market; over five days it is roughly flat (-0.3%) against SPY's -2.7%. Recent news is mixed: US spot Bitcoin and Ether ETFs posted $530M in combined outflows on Nov 6 as stocks fell, and Ethereum developers paused a Glamsterdam testnet fork over smart contract risks. Offsetting this, Russia finalized retail crypto trading rules (ETH included) ahead of a Nov 17 rollout, and Amundi tokenized an equity index fund on Ethereum."
+    }
+  ],
+  "MSFT": [
+    {
+      "date": "2026-11-07",
+      "price": {
+        "ticker": "MSFT",
+        "price": 530.61,
+        "change_1d_pct": -0.99,
+        "change_5d_pct": 1.67,
+        "change_1m_pct": 0.16
+      },
+      "sentiment": "Neutral",
+      "priority": "low",
+      "summary": "MSFT closed at $530.61, down 0.99% today while SPY rose 0.31%, so it underperformed the market by about 1.3 points on a move well below the 5% threshold. Over five days MSFT is up 1.67% against SPY's -2.7%, and over one month it is roughly flat (+0.16%) against SPY's -5.39%, so it has held up better than the broad market. No earnings are scheduled in the next 45 days, and no stock-specific news was checked because the move was small."
+    }
+  ]
+}
