@@ -1,0 +1,10 @@
+# secrets — never commit
+.env
+
+# local stuff
+venv/
+__pycache__/
+*.pyc
+preview.html
+digest.log
+.DS_Store
