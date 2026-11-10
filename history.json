@@ -25,6 +25,19 @@
       "sentiment": "Mixed",
       "priority": "medium",
       "summary": "ASPI closed at $2.14, up 3.13% today, versus SPY up 2.37%, so the move is mostly market-driven with only a small stock-specific excess (~0.8%). The stock is still down 12.3% over one month after a 27% drop, though it is up 10.3% over five days, which follows the 20.6% jump on Nov 7. The driver is the Nov 6 news that partner Tetra4 (a Renergen subsidiary) began stable liquid helium production at the Virginia Gas Project in South Africa, with initial deliveries starting. Q3 earnings are scheduled for Nov 17 (8 days out, consult estimate EPS -$0.20, revenue about $5.8M)."
+    },
+    {
+      "date": "2026-11-10",
+      "price": {
+        "ticker": "ASPI",
+        "price": 2.02,
+        "change_1d_pct": -5.84,
+        "change_5d_pct": 11.33,
+        "change_1m_pct": -17.42
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "ASPI fell 5.84% today to $2.02 while SPY dropped only 0.57%, so roughly 5 points of the decline is stock-specific. The only news found (Nov 6) is partner Tetra4's (a Renergen subsidiary) start of stable liquid helium production at the Virginia Gas Project, and no new catalyst appeared for today's drop, so it looks like a pullback after the 20.6% jump on Nov 7. The stock is still down 17.4% over one month, and Q3 earnings are due Nov 17 (consensus EPS about -$0.20, revenue about $5.8M)."
     }
   ],
   "OUST": [
@@ -53,6 +66,19 @@
       "sentiment": "Bullish",
       "priority": "high",
       "summary": "OUST rose 10.85% to $38.57 today while SPY gained 2.37%, so roughly 8.5 points of the move is stock-specific, though the broad market rally also contributed. A 14-day news search finds no company-specific catalyst for today's gain. The backdrop remains supportive: record Q3 revenue of $59.3M (up 50% YoY), Q4 guidance of $61-64M, over $400M in cash, and an Amerx upgrade to Buy on Nov 4 (price target cut to $52.5). The stock is up 36.7% over five days but still down 3.5% over one month, after giving back gains on Nov 5."
+    },
+    {
+      "date": "2026-11-10",
+      "price": {
+        "ticker": "OUST",
+        "price": 37.69,
+        "change_1d_pct": -2.28,
+        "change_5d_pct": 30.06,
+        "change_1m_pct": 1.13
+      },
+      "sentiment": "Bullish",
+      "priority": "medium",
+      "summary": "OUST closed at $37.69, down 2.28% today versus SPY down 0.56%, so the pullback is mostly modest and not a stock-specific shock. The stock is up 30% over five days after rallies on Nov 7 and Nov 9 that had no confirmed company catalyst. Today's news is a customer win: Indra selected Ouster to supply Rev7 lidar sensors for electronic toll collection, with hundreds of units already deployed. Fundamentals remain supportive (record Q3 revenue of $59.3M, up 50% YoY; Q4 guidance of $61-64M; over $400M in cash; Amerx upgrade to Buy on Nov 4), and no earnings are scheduled in the next 45 days."
     }
   ],
   "LAES": [
@@ -81,6 +107,19 @@
       "sentiment": "Mixed",
       "priority": "high",
       "summary": "LAES (SEALSQ) rose 9.85% to $1.45 today while SPY gained 2.37%, so about 7.5 points of the move is stock-specific. The 7-day news flow contains only routine items: same-day press releases on a RegTech award for subsidiary Wecan and a post-quantum medical-device collaboration with IC'Alps, plus earlier partnership and MoU announcements. No earnings are scheduled in the next 45 days, so no clear fundamental catalyst explains the jump. The stock is still down 28% over one month, so this looks like a sharp bounce from a steep sell-off."
+    },
+    {
+      "date": "2026-11-10",
+      "price": {
+        "ticker": "LAES",
+        "price": 1.42,
+        "change_1d_pct": -1.72,
+        "change_5d_pct": 4.01,
+        "change_1m_pct": -29.46
+      },
+      "sentiment": "Mixed",
+      "priority": "medium",
+      "summary": "LAES (SEALSQ) closed at $1.42, down 1.72% today, while SPY fell 0.56%, so the move is roughly in line with the market and not stock-specific. The stock is up 4.0% over 5 days but down 29.5% over one month, following the sharp sell-off and the partial bounces reported on 11/07 and 11/09. No earnings are scheduled in the next 45 days, and prior news flow has been routine partnership and award announcements with no clear fundamental catalyst."
     }
   ],
   "TGEN": [
@@ -109,6 +148,19 @@
       "sentiment": "Mixed",
       "priority": "high",
       "summary": "TGEN (Tecogen) closed at $1.77, up 2.9% today versus SPY's 2.4% gain, so the move is almost entirely market-driven and not stock-specific. The stock is still down 24.7% over one month, and the 5-day change is -1.7%. Q3 2026 results are due Thursday, Nov 12 (3 days out), with an EPS estimate of about -$0.065 and revenue of about $6.54M; the only recent news is the Nov 4 earnings-date notice."
+    },
+    {
+      "date": "2026-11-10",
+      "price": {
+        "ticker": "TGEN",
+        "price": 1.72,
+        "change_1d_pct": -2.82,
+        "change_5d_pct": -8.51,
+        "change_1m_pct": -26.81
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "TGEN fell 2.8% to $1.72 today versus SPY's -0.55%, so about 2.3 points of underperformance, which is modest and not a stock-specific shock. The stock is down 26.8% over one month and 8.5% over five days, and the only recent news is the Nov 4 notice of the Q3 2026 release, so there is no fundamental catalyst yet. Q3 results are due Thursday, Nov 12 (2 days out), with an EPS estimate of about -$0.065 and revenue of about $6.54M."
     }
   ],
   "ETH-USD": [
@@ -137,6 +189,19 @@
       "sentiment": "Mixed",
       "priority": "medium",
       "summary": "ETH-USD closed at $2,124.99, up 0.19% today while SPY rose 2.37%, so it lagged the market sharply today. Over five days ETH is down 12.3% versus SPY's flat +0.08%, and over one month it is down 14.5% versus SPY's -3.3%. The drawdown coincides with post-US-midterm crypto weakness, $530M of combined BTC and ETH ETF outflows on Nov 6, and Glamsterdam fork delays over smart contract risks. Offsetting positives are the PNC USDC-to-deposit pilot on Ethereum and Russia's retail crypto trading rules (effective Nov 17)."
+    },
+    {
+      "date": "2026-11-10",
+      "price": {
+        "ticker": "ETH-USD",
+        "price": 2042.7,
+        "change_1d_pct": -4.17,
+        "change_5d_pct": -8.58,
+        "change_1m_pct": -18.42
+      },
+      "sentiment": "Bearish",
+      "priority": "high",
+      "summary": "ETH-USD fell 4.17% today to $2,042.70 versus SPY's -0.55%, so about 3.6 points of the drop is ETH-specific, below the 5% single-day threshold. It is down 8.6% over five days and 18.4% over one month, against SPY's -0.8% and -3.8%. Recent news is mixed-to-negative: a lawsuit from a former Ethereum Foundation employee, Glamsterdam upgrade delays over contract-breaking risk, post-midterm crypto weakness, and $530M of BTC/ETH ETF outflows on Nov 6. Positives include the PNC USDC-to-deposit pilot on Ethereum and Russia's retail crypto trading rules effective Nov 17."
     }
   ],
   "MSFT": [
@@ -165,6 +230,19 @@
       "sentiment": "Neutral",
       "priority": "medium",
       "summary": "MSFT closed at $545.18, up 2.75% today versus SPY's +2.37%, so most of the move is market-wide (about 0.4 points of excess return). Over five days MSFT is up 7.5% while SPY is roughly flat, a meaningful relative-strength run. Recent headlines are mixed: Microsoft is winding down a small compute-rental deal with Oracle, and some analysts call the AI stock selloff unwarranted and see cloud giants as post-midterm beneficiaries. No earnings are scheduled within the next 45 days."
+    },
+    {
+      "date": "2026-11-10",
+      "price": {
+        "ticker": "MSFT",
+        "price": 534.48,
+        "change_1d_pct": -1.96,
+        "change_5d_pct": 2.59,
+        "change_1m_pct": -1.23
+      },
+      "sentiment": "Neutral",
+      "priority": "low",
+      "summary": "MSFT closed at $534.48, down 1.96% today versus SPY's -0.57%, so about 1.4 points of underperformance on a move well below the 5% threshold. It is still up 2.6% over five days, but that is down from +7.5% in the prior report (2026-11-09), so the recent rally has partly reversed; 1-month change is -1.2% versus SPY's -3.8%."
     }
   ]
 }
