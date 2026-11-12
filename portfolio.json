@@ -1,3 +1,9 @@
 {
-  "holdings": ["MSFT", "ASPI", "OUST", "LAES", "TGEN", "ETH-USD"]
+  "holdings": [
+    "MSFT",
+    "ASPI",
+    "OUST",
+    "LAES",
+    "TGEN"
+  ]
 }
