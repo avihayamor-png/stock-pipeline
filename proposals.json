@@ -1,0 +1,8 @@
+[
+  {
+    "date": "2026-11-12",
+    "action": "remove",
+    "ticker": "ETH-USD",
+    "reason": "ETH-USD has moved from Mixed (11/07) to Bearish on 11/10, 11/11, and today, with a sustained drawdown of 17.7% over one month versus SPY's -2.5%. The reports tie this to concrete negatives: $530M of BTC/ETH ETF outflows on Nov 6, Glamsterdam upgrade delays over smart contract risk, and an Ethereum Foundation employee lawsuit. Today's 2.1% decline is modest, so this is a recommendation based on repeated Bearish readings and not a single bad day; the human reviewer should weigh the offsetting PNC USDC pilot and Russia's Nov 17 retail rules."
+  }
+]
