@@ -77,6 +77,19 @@
       "sentiment": "Bearish",
       "priority": "high",
       "summary": "ASPI fell 8.3% today to $1.72 while SPY fell only 0.5%, so roughly 7.8 points of the drop is stock-specific. The only news in the past 14 days is the Nov 6 announcement that partner Tetra4 (Renergen subsidiary) began stable liquid helium production at the Virginia Gas Project; no new catalyst explains today's drop. The stock has now given back the entire Nov 7 spike (+20.6%) and is down 17% over 5 days and 25% over 1 month."
+    },
+    {
+      "date": "2026-11-16",
+      "price": {
+        "ticker": "ASPI",
+        "price": 1.54,
+        "change_1d_pct": -11.49,
+        "change_5d_pct": -28.04,
+        "change_1m_pct": -25.06
+      },
+      "sentiment": "Bearish",
+      "priority": "high",
+      "summary": "ASPI fell 11.5% to $1.54 today while SPY fell 1.9%, so roughly 9.6 points of the drop is stock-specific. It has now given back the entire Nov 7 spike (+20.6%) and is down 28% over 5 days and 25% over 1 month. The only news in the past 14 days is the Nov 6 announcement that partner Tetra4 (a Renergen subsidiary) began stable liquid helium production at the Virginia Gas Project; no new catalyst explains today's drop."
     }
   ],
   "OUST": [
@@ -157,6 +170,19 @@
       "sentiment": "Mixed",
       "priority": "high",
       "summary": "OUST fell 8.31% to $33.56 today while SPY was down only 0.51%, so the drop is stock-specific. A 14-day news search finds no company catalyst for the decline. Last week's Indra Rev7 toll-collection win (Nov 10) and the Nov 4 Amerx upgrade to Buy remain the latest positives, and fundamentals are intact (record Q3 revenue $59.3M, up 50% YoY; Q4 guide $61-64M; over $400M cash). Part of the drop looks like a give-back after a sharp 5-day rally (about +36% from Nov 6 to Nov 9), and a Seeking Alpha note today rates the stock Hold given its valuation (above 10x forward EV/Sales)."
+    },
+    {
+      "date": "2026-11-16",
+      "price": {
+        "ticker": "OUST",
+        "price": 31.23,
+        "change_1d_pct": -6.72,
+        "change_5d_pct": -19.03,
+        "change_1m_pct": 8.21
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "OUST fell 6.72% to $31.23 today while SPY fell 1.91%, so roughly 4.8 points is stock-specific. No company-specific news explains the drop in the last 14 days (the only recent item is an unrelated Intellicheck headline), so it looks like a give-back after the sharp early-November rally (about +36% from Nov 6 to Nov 9), with a Seeking Alpha Hold rating (above 10x forward EV/Sales) adding valuation pressure. The stock is down 19% over five days but up 8.2% over one month, and fundamentals are intact: record Q3 revenue of $59.3M (up 50% YoY), Q4 guidance of $61-64M, over $400M cash, the Nov 4 Amerx upgrade to Buy, and the Nov 10 Indra Rev7 toll-collection win. No earnings are scheduled in the next 45 days."
     }
   ],
   "LAES": [
@@ -237,6 +263,19 @@
       "sentiment": "Mixed",
       "priority": "medium",
       "summary": "LAES (SEALSQ) closed at $1.26, down 4.17% today versus SPY at -0.51%, so about 3.7 points of the drop is stock-specific, below the 5% threshold. The stock is down 34.5% over one month. Recent news has been routine (partnerships, awards, MoUs) with no earnings scheduled in the next 45 days, so nothing clearly explains the weakness beyond continued post-sell-off volatility."
+    },
+    {
+      "date": "2026-11-16",
+      "price": {
+        "ticker": "LAES",
+        "price": 1.14,
+        "change_1d_pct": -8.4,
+        "change_5d_pct": -21.03,
+        "change_1m_pct": -31.44
+      },
+      "sentiment": "Mixed",
+      "priority": "high",
+      "summary": "LAES (SEALSQ) fell 8.4% to $1.14 today while SPY fell 1.91%, so roughly 6.5 points of the decline is stock-specific. It is down 21% over five days and 31% over one month, extending a steep post-quantum-theme sell-off. The 14-day news flow is routine (BMO conference remarks, WISeSat collaboration, SEALQuantum strategy, Wecan award, TechAgency partnership) and does not explain a move of this size, and no earnings are scheduled in the next 45 days."
     }
   ],
   "TGEN": [
@@ -317,6 +356,19 @@
       "sentiment": "Mixed",
       "priority": "high",
       "summary": "TGEN (Tecogen) fell 8.6% today to $2.03 while SPY was down 0.55%, so the drop is stock-specific, and it gives back part of yesterday's 31.8% jump to $2.24. The jump followed a Q3 2026 beat (EPS -$0.05 vs. about -$0.06 consensus; revenue $7.87M vs. about $6.41M) and an earnings call highlighting narrowed losses, growing services margins and a retrofit power module for data centers. No news I found explains today's decline, so it looks like profit-taking after a sharp spike, though the cause is unconfirmed. The stock is still up about 18% over 5 days but down about 12% over 1 month."
+    },
+    {
+      "date": "2026-11-16",
+      "price": {
+        "ticker": "TGEN",
+        "price": 1.99,
+        "change_1d_pct": 4.19,
+        "change_5d_pct": 12.43,
+        "change_1m_pct": -6.13
+      },
+      "sentiment": "Bullish",
+      "priority": "high",
+      "summary": "TGEN (Tecogen) closed at $1.99, up 4.2% today while SPY fell 1.9%, so the move is stock-specific outperformance of about 6 points. No news from the last 4 days explains today's gain specifically. The backdrop is the Q3 2026 beat reported Nov 12 (EPS -$0.05 vs. about -$0.06 consensus; revenue $7.87M vs. about $6.41M, up 9.6% y/y), narrower losses, growing services margins, a data-center retrofit power module, and a reiterated Roth Buy with a $10 target. The stock is still volatile: it spiked 31.8% on Nov 12, fell 8.6% on Nov 13, and is up 12.4% over 5 days but down 6.1% over 1 month."
     }
   ],
   "ETH-USD": [
@@ -397,6 +449,19 @@
       "sentiment": "Bearish",
       "priority": "medium",
       "summary": "ETH-USD closed at $1,941.62, down 3.73% today versus SPY's -0.55%, so roughly 3 points of the move is ETH-specific, below the 5% threshold. No single catalyst stands out today; the closest item is a CoinDesk report that treasury firm BTCS sold ether at a loss to keep a $64M Aave loan healthy, a forced-selling headline. The broader picture remains weak: ETH is down 8.5% over five days and 22.2% over one month, against SPY's +2.4% and -3.2%, driven by $530M of BTC/ETH ETF outflows, Glamsterdam upgrade delays, an Ethereum Foundation lawsuit, and post-midterm crypto weakness."
+    },
+    {
+      "date": "2026-11-16",
+      "price": {
+        "ticker": "ETH-USD",
+        "price": 1824.21,
+        "change_1d_pct": -0.61,
+        "change_5d_pct": -11.27,
+        "change_1m_pct": -24.61
+      },
+      "sentiment": "Bearish",
+      "priority": "medium",
+      "summary": "ETH-USD closed at $1,824.21, down 0.61% today versus SPY's -1.91%, so it held up better than the market today and the move is not stock-specific. It is still in a steep downtrend: down 11.3% over five days and 24.6% over one month, against SPY's -1.7% and -3.5%. Prior reports tie the drawdown to $530M of BTC/ETH ETF outflows on Nov 6, Glamsterdam upgrade delays over smart contract risk, an Ethereum Foundation lawsuit, post-midterm crypto weakness, and a forced-selling headline (BTCS selling ether at a loss to protect an Aave loan)."
     }
   ],
   "MSFT": [
@@ -477,6 +542,19 @@
       "sentiment": "Neutral",
       "priority": "low",
       "summary": "MSFT closed at $524.56, up 0.3% today while SPY fell 0.51%, so the stock outperformed the market by about 0.8 points on a small move. The stock is down 1.1% over five days and 3.5% over one month, versus SPY's +2.4% and -3.2%, after a sharp 11/09 rally (+7.5% over five days) fully reversed on 11/11 on AI-competition worries (Anthropic's Claude Sheets versus Microsoft 365, which Evercore calls a limited threat) and unease over data center spending. No earnings are scheduled in the next 45 days."
+    },
+    {
+      "date": "2026-11-16",
+      "price": {
+        "ticker": "MSFT",
+        "price": 517.99,
+        "change_1d_pct": -1.12,
+        "change_5d_pct": -4.99,
+        "change_1m_pct": -2.91
+      },
+      "sentiment": "Neutral",
+      "priority": "medium",
+      "summary": "MSFT closed at $517.99, down 1.12% today versus SPY's -1.91%, so the move was market-driven and the stock slightly outperformed. Over five days MSFT is down 5.0% against SPY's -1.7%, so about 3.3 points of underperformance, after the 11/09 rally fully reversed on AI-competition worries (Anthropic's Claude Sheets versus Microsoft 365, which Evercore calls a limited threat) and investor unease over data center spending."
     }
   ]
 }
