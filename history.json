@@ -181,6 +181,19 @@
       "sentiment": "Bearish",
       "priority": "high",
       "summary": "ASPI rose 18.8% today to $1.29 while SPY was roughly flat (-0.3%), so the move is almost entirely stock-specific. Neither the 14-day news search nor the earnings lookup shows a catalyst, and no earnings fall in the next 45 days. This looks like a sharp rebound after a 46% one-month slide (down 20% over 5 days before today) rather than a fundamental change."
+    },
+    {
+      "date": "2026-11-26",
+      "price": {
+        "ticker": "ASPI",
+        "price": 1.3,
+        "change_1d_pct": 19.27,
+        "change_5d_pct": 5.69,
+        "change_1m_pct": -35.64
+      },
+      "sentiment": "Bearish",
+      "priority": "high",
+      "summary": "ASPI rose 19.3% to $1.30 today while SPY was down 0.3%, so roughly 19.5 points of the move is stock-specific. Neither the 14-day news search nor the earnings lookup shows a catalyst, and no earnings are scheduled in the next 45 days. The bounce follows a severe slide (down 20% over 5 days and about 36% over one month before today), and the stock remains well below its Nov 7 Tetra4 spike level."
     }
   ],
   "OUST": [
@@ -365,6 +378,19 @@
       "sentiment": "Mixed",
       "priority": "medium",
       "summary": "OUST rose 3.3% to $25.82 today while SPY fell 0.3%, so roughly 3.6 points is stock-specific, below the 5% alert threshold. No company-specific news surfaced in the last two days (the only Ouster items are an analyst-upside screen and a generic sector note), and no earnings are scheduled in the next 45 days. The stock is still about 35% below its Nov 11 close of $39.56 after three large swings in three sessions (-13.4%, +17.2%, -10.4%), which look like a volatile momentum unwind rather than a fundamental break, since Q3 revenue of $59.3M (+50% YoY), Q4 guidance of $61-64M, and over $400M in cash are unchanged."
+    },
+    {
+      "date": "2026-11-26",
+      "price": {
+        "ticker": "OUST",
+        "price": 25.77,
+        "change_1d_pct": 3.12,
+        "change_5d_pct": -12.05,
+        "change_1m_pct": -13.26
+      },
+      "sentiment": "Mixed",
+      "priority": "medium",
+      "summary": "OUST closed at $25.77, up 3.1% today versus SPY down 0.3%, so about 3.4 points is stock-specific and below the 5% alert threshold. The stock is still down about 35% from its Nov 11 close of $39.56 and about 12% over five days, after three large swings in three sessions (-13.4% Nov 20, +17.2% Nov 23, -10.4% Nov 24). No company-specific catalyst has surfaced in 14 days of news; the latest Ouster items are the Nov 17 second Nashville DOT lidar contract and general sector coverage. Fundamentals are unchanged (record Q3 revenue of $59.3M, up 50% YoY; Q4 guide $61-64M; over $400M cash), so the selloff looks like a volatile momentum unwind rather than a fundamental break."
     }
   ],
   "LAES": [
@@ -549,6 +575,19 @@
       "sentiment": "Bearish",
       "priority": "high",
       "summary": "LAES (SEALSQ) rose 7.8% to $1.05 on 2026-11-25 while SPY fell 0.29%, so roughly 8 points of the move is stock-specific. The news feed shows no clear catalyst dated today; the closest item is a 11/24 GlobeNewswire/Benzinga release on working with data center providers to expand Quantum Highway hubs in the US, India and Europe, which gives no financial terms or volume orders. The stock is still in a steep downtrend (down 10% over 5 days and about 36% over 1 month) and has been below $1 intraday/close recently, with no earnings in the next 45 days."
+    },
+    {
+      "date": "2026-11-26",
+      "price": {
+        "ticker": "LAES",
+        "price": 1.07,
+        "change_1d_pct": 9.86,
+        "change_5d_pct": -10.83,
+        "change_1m_pct": -29.61
+      },
+      "sentiment": "Bearish",
+      "priority": "high",
+      "summary": "LAES (SEALSQ) rose 9.9% to $1.07 while SPY fell 0.3%, so roughly 10 points of the move is stock-specific. No news explains it: the only item from the last 5 days is a 11/25 Euronext Paris approval to list existing ordinary shares (no new shares issued), which is administrative, not a financial catalyst. The stock remains in a steep downtrend (-11% over 5 days, -30% over 1 month) after the 11/18 QuintessenceLabs LOI pop was fully reversed, and no earnings are due in the next 45 days."
     }
   ],
   "TGEN": [
@@ -733,6 +772,19 @@
       "sentiment": "Mixed",
       "priority": "low",
       "summary": "TGEN (Tecogen) closed at $1.85, down 2.89% today while SPY fell 0.29%, so roughly 2.6 points of the move is stock-specific and small. It is following a whipsawing path since the Nov 12 Q3 beat (EPS -$0.05 vs. about -$0.06 consensus; revenue $7.87M vs. about $6.41M): a 22% slide to $1.59 on Nov 20, a 14% rebound on Nov 23, and a further 8% gain on Nov 24, with no news in the last 14 days explaining those swings."
+    },
+    {
+      "date": "2026-11-26",
+      "price": {
+        "ticker": "TGEN",
+        "price": 1.87,
+        "change_1d_pct": -1.58,
+        "change_5d_pct": 5.65,
+        "change_1m_pct": -2.6
+      },
+      "sentiment": "Mixed",
+      "priority": "low",
+      "summary": "TGEN (Tecogen) closed at $1.87, down 1.58% today versus SPY's 0.29% decline, so only about 1.3 points is stock-specific and small. The stock is up 5.65% over five days but down 2.6% over one month, following a whipsaw since the Nov 12 Q3 beat: a 22% slide to $1.59 on Nov 20, a 14% rebound on Nov 23, and an 8% gain on Nov 24, with no news in the last 14 days explaining those swings."
     }
   ],
   "ETH-USD": [
@@ -917,6 +969,19 @@
       "sentiment": "Bearish",
       "priority": "medium",
       "summary": "ETH-USD closed at $1,685.14, up 0.44% today while SPY fell 0.28%, so the move is flat and not stock-specific. ETH is still in a steep one-month downtrend (-27.6%), driven by the ETF outflows, Glamsterdam delay risk, Binance-hack-related ETH movements, and treasury selling noted in prior reports. The price tool's 5-day change (+4.06%) conflicts with the -4.3% 5-day change in the Nov 24 report, so that figure should be checked before relying on it."
+    },
+    {
+      "date": "2026-11-26",
+      "price": {
+        "ticker": "ETH-USD",
+        "price": 1703.56,
+        "change_1d_pct": 0.76,
+        "change_5d_pct": 1.27,
+        "change_1m_pct": -26.58
+      },
+      "sentiment": "Bearish",
+      "priority": "medium",
+      "summary": "ETH-USD closed at $1,703.56, up 0.76% today while SPY fell 0.29%, so the move is flat and not stock-specific. ETH is still in a steep one-month downtrend (-26.6%), following the ETF outflows, Glamsterdam delay risk, Binance-hack ETH movements and treasury selling noted in prior reports. The price tool's 5-day change (+1.27%) conflicts with the history: the Nov 19 close of $1,772.15 implies about -3.9% over 5 days, so the tool figure should not be relied on."
     }
   ],
   "MSFT": [
@@ -1101,6 +1166,19 @@
       "sentiment": "Neutral",
       "priority": "medium",
       "summary": "MSFT closed at $490.21, down 1.19% today versus SPY's -0.27%, so about 0.9 points of underperformance on a modest move that is mostly market-driven. The stock is in a multi-day downtrend: -3.4% over five days and -7.8% over one month (SPY -1.8% and -6.3%), with the 11/09 rally fully unwound. Prior reports cite AI-competition worries (Anthropic's Claude Sheets vs. Microsoft 365, which Evercore calls a limited threat), a software-sector sell-off, and concern over data center spending."
+    },
+    {
+      "date": "2026-11-26",
+      "price": {
+        "ticker": "MSFT",
+        "price": 489.93,
+        "change_1d_pct": -1.25,
+        "change_5d_pct": -3.43,
+        "change_1m_pct": -7.83
+      },
+      "sentiment": "Neutral",
+      "priority": "medium",
+      "summary": "MSFT closed at $489.93, down 1.25% today versus SPY's -0.29%, so about 1 point of underperformance on a modest move that is mostly market-driven. The stock is in a multi-day downtrend (-3.4% over 5 days, -7.8% over 1 month vs SPY -1.9% and -6.4%), with the 11/09 rally fully unwound, amid AI-competition worries (Anthropic's Claude Sheets vs. Microsoft 365, which Evercore calls a limited threat), a software-sector sell-off, and concern over data center spending. No stock-specific catalyst surfaced today and no earnings are scheduled in the next 45 days."
     }
   ]
 }
